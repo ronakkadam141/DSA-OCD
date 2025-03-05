@@ -1,0 +1,23 @@
+Q1)
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        if(s.empty()) return 0;
+        unordered_map<char,int>mp;
+        for(int i=0;i<s.size();i++){
+            mp[s[i]]++;
+        }
+        if(mp.size()==1) return s.size();
+        int ans=0;
+        bool foundodd=false;
+        for(auto it:mp){
+            if(it.second%2==0) ans=ans+it.second;
+            if(it.second%2==1){ 
+                ans=ans+(it.second-1);
+                foundodd=true;
+            }
+        }
+        if(foundodd==true) ans=ans+1;
+        return ans;
+    }
+};
