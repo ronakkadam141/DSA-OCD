@@ -21,3 +21,53 @@ public:
         return ans;
     }
 };
+
+Q2)
+class Solution {
+public:
+    int distMoney(int money, int children) {
+        int m=money;
+        int n=children;
+        if(m<n) return -1;
+        m=m-n;
+        int ans=0;
+        while(m>=7 && ans<n){
+            m-=7;
+            ans++;
+        }
+        
+        if((ans==n && m>0 )||(m==3 && n-ans==1)) ans--;
+
+        return ans;
+    }
+};
+
+Q3) Leetcode POTD 
+class Solution {
+public:
+    vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {
+        bool foundmissing=false,founddouble=false;
+        int missingnum,doublenum;
+        int n=grid.size();
+        int num=n*n;
+        vector<int>vec(num,0);
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                vec[grid[i][j]-1]++;
+            }
+        }
+
+        for(int i=0;i<vec.size();i++){
+            if(foundmissing==true && founddouble==true) break;
+            if(vec[i]==0){ 
+                missingnum=i+1;
+                foundmissing=true;
+            }
+            if(vec[i]==2){ 
+                doublenum=i+1;
+                founddouble=true;
+            }
+        }   
+        return {doublenum,missingnum};
+    }
+};
