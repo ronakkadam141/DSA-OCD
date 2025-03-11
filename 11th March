@@ -1,0 +1,100 @@
+Leetocde POTD 
+Code:
+class Solution {
+public:
+    int numberOfSubstrings(string s) {
+        int substrings=0;
+        int n=s.size();
+
+        int start=0,end=0;
+
+        int afreq=0,bfreq=0,cfreq=0;
+
+        while(end<n){
+            if(s[end]=='a') afreq++;
+            if(s[end]=='b') bfreq++;
+            if(s[end]=='c') cfreq++;
+            while(afreq>=1 && bfreq>=1 && cfreq>=1 ){
+                substrings+=(n-end);
+                if(s[start]=='a') afreq--;
+                if(s[start]=='b') bfreq--;
+                if(s[start]=='c') cfreq--;
+                start++;
+            }
+            end++;
+        }
+        return substrings;
+    }
+};
+
+
+q1) Rearrange Array 
+Code:
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        int n=nums.size();
+        if(n==1) return nums;
+        vector<int>result(n);
+
+        int i=0,posi=0,negi=1;
+
+        for(int i=0;i<n;i++){
+            if(nums[i]>0){
+                result[posi]=nums[i];
+                posi+=2;
+            }
+            if(nums[i]<0){
+                result[negi]=nums[i];
+                negi+=2;
+            }
+        }
+        return result;
+    }
+};
+
+q2) Max profit 
+Code:
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int minpri=INT_MAX,maxpro=0;
+        
+        for(int i=0;i<prices.size();i++){
+            minpri=min(minpri,prices[i]);
+            maxpro=max(maxpro,prices[i]-minpri);
+        }
+
+        return maxpro;
+    }
+};
+
+q3) Next Permutation
+Code:
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>real=nums;
+        int minind=-1;
+        for(int i=n-1;i>0;i--){
+            if(nums[i]>nums[i-1]){
+                minind=i-1;
+                break;
+            }
+        }
+        if(minind==-1){ 
+            reverse(nums.begin(),nums.end());
+            return;
+        }
+        int maxind=minind+1;
+        for(int i=minind+1;i<n;i++){
+            if(nums[i]>nums[minind]){
+                maxind=i;
+            }
+        }
+        swap(nums[minind],nums[maxind]);
+
+        reverse(nums.begin()+minind+1,nums.end());
+    }
+};
