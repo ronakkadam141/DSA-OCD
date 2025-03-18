@@ -1,0 +1,26 @@
+LC POTD:
+class Solution {
+public:
+    int longestNiceSubarray(vector<int>& nums) {
+        int n=nums.size(),ans=1;
+        int i=0,j=1;
+        while(j<n){
+            bool found=false;
+            for(int k=i;k<j;k++){
+                if((nums[k]&nums[j])!=0){
+                    found=true;
+                    break;
+                }
+            
+            }
+            if(found) i++;
+            else{
+                ans=max(ans,j-i+1);
+                j++;
+            }
+        }
+        return ans;
+    }
+};
+SC:O(1)
+TC:O()
