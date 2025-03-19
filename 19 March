@@ -1,0 +1,69 @@
+q1)
+class Solution {
+public:
+    string removeOuterParentheses(string s) {
+        int n = s.length();
+        stack<char> st;
+        string result;
+
+        for (int i = 0; i < n; i++) {
+            if (s[i] == '(') {
+                if (!st.empty()) result.push_back(s[i]);
+                st.push(s[i]);
+            } 
+            else {
+                st.pop();
+                if (!st.empty()) result.push_back(s[i]);
+            }
+        }
+
+        return result;
+    }
+};
+TC:O(N)
+SC:O(N)
+
+q2)
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        int len=s.length();  
+        int s_to_t[256]={0}, t_to_s[256]={0};
+        for(int i=0;i<len;i++){
+            if(s_to_t[s[i]]!=t_to_s[t[i]]) return false;
+            s_to_t[s[i]]=i+1;
+            t_to_s[t[i]]=i+1;
+        }
+        return true;
+
+    }
+};
+TC:O(N)
+SC: O(1)
+
+LC POTD:
+class Solution {
+public:
+    int minOperations(vector<int>& nums) {
+        int n=nums.size();
+        int ops=0;
+        for(int i=0;i<=n-3;i++){
+            if(nums[i]==0){
+                ops++;
+                nums[i]=1;
+                if(nums[i+1]==0) nums[i+1]=1;
+                else nums[i+1]=0;
+
+                if(nums[i+2]==0) nums[i+2]=1;
+                else nums[i+2]=0;
+            }
+        }
+
+        for(int i=0;i<n;i++){
+            if(nums[i]==0) return -1;
+        }
+        return ops;
+    }
+};
+TC:O(N)
+SC:O(1)
