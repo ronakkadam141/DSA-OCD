@@ -1,0 +1,56 @@
+q1) Valid Anagram 
+Code:
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        int n=s.length();
+        int m=t.length();
+
+        if(n!=m) return false;
+
+        unordered_map<char,int>sc,tc;
+
+        for(int i=0;i<n;i++){
+            sc[s[i]]++;
+        }
+        for(int i=0;i<m;i++){
+            tc[t[i]]++;
+        }
+
+        return sc==tc;
+    }
+};
+TC:O(N)
+SC:O(N)
+
+q2) Longest common prefix 
+Code:
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        int n=strs.size();
+        string res="";
+        if(n==0) return res;
+        if(n==1) return strs[0];
+        int result=strs[0].length();
+        for(int i=0;i<n-1;i++){
+            int len=0;
+            int len1=strs[i].length();
+            int len2=strs[i+1].length();
+            int ind=min(len1,len2);
+
+            for(int j=0;j<ind;j++){
+                if(strs[i][j]==strs[i+1][j]) len++;
+                else break;
+            }
+            result=min(result,len);
+        }
+        for(int i=0;i<result;i++){
+            res.push_back(strs[0][i]);
+        }
+
+        return res;
+    }
+};
+TC:O(N*M)
+SC:O(1)
