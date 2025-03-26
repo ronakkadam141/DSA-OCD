@@ -1,0 +1,72 @@
+q1)
+Code:
+class Solution {
+public:
+    string frequencySort(string s) {
+        int n=s.length();
+        vector<int>vec(256,0);
+        string res;
+
+        for(auto it:s){
+            vec[it]++;
+        }        
+
+        vector<pair<int,char>>ans;   
+        for(int i=0;i<256;i++){
+            if(vec[i]!=0){ 
+                char ch=(char)i; 
+                ans.push_back({vec[i],ch});
+            }
+        }
+        sort(ans.begin(),ans.end());
+        reverse(ans.begin(),ans.end());
+        
+        for(auto it:ans){
+            for(int i=0;i<it.first;i++){
+                res.push_back(it.second);
+            }
+        }
+
+        return res;
+    }
+};
+TC:O(N)
+SC:O(N)
+
+q2)
+Code:
+class Solution {
+public:
+    int myAtoi(string s) {
+        int n = s.length();
+        
+        int i = 0;
+        int foundneg = 1;
+
+        
+        while (i < n && s[i] == ' ') i++;
+
+        
+        if (i < n && (s[i] == '+' || s[i] == '-')) {
+            if(s[i] == '-') foundneg=-1;
+            i++;
+        }
+
+        int ans = 0;
+        while (i < n && (s[i] >= '0' && s[i] <= '9')) {
+            int num = s[i] - '0';
+
+            if (ans > (INT_MAX - num) / 10) {
+                if (foundneg == 1) return INT_MAX;
+                else return INT_MIN;
+            }
+
+            ans = ans * 10 + num;
+            i++;
+        }
+
+        return ans*foundneg;
+    }
+};
+TC:O(N)
+SC:O(1)
