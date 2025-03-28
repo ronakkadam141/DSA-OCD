@@ -1,0 +1,53 @@
+q1) Delete Node
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+        ListNode* prev;
+        ListNode* curr=node;
+        ListNode* temp=node->next;
+
+        while(temp!=nullptr){
+            curr->val=temp->val;
+            prev=curr;
+            curr=curr->next;
+            temp=temp->next;
+        }
+
+        prev->next=nullptr;
+        delete curr;
+
+    }
+};
+
+Q2) insert at end
+class Solution {
+  public:
+    Node *insertAtEnd(Node *head, int x) {
+        
+        if(head==nullptr){
+            return new Node(x);
+        }
+        Node*temp=head;
+        Node*prev;
+        
+        while(temp!=nullptr){
+            prev=temp;
+            temp=temp->next;
+        }
+        
+        Node* newnode=new Node(x);
+        
+        prev->next=newnode;
+        
+        return head;
+        
+    }
+};
