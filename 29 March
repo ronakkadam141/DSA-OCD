@@ -43,14 +43,6 @@ class Solution {
                 return head;
             }
         }
-        
-        int n=0;
-        Node*curr=head;
-        while(curr!=nullptr){
-            n++;
-            curr=curr->next;
-        }
-        
         Node* temp=head->next;
         Node* back=head;
         int ind=2;
