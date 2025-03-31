@@ -1,0 +1,35 @@
+q1)cyclic linked list 
+Code:
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        ListNode* tortoise=head;
+        ListNode* hare=head;
+
+        while(hare!=nullptr && hare->next!=nullptr ){
+            tortoise=tortoise->next;
+            hare=hare->next->next;
+            if(tortoise==hare) return true;
+        }
+        return false;
+    }
+};
+TC:O(N)
+SC:O(1)
+q1)middle linked list 
+Code:
+class Solution {
+public: 
+    ListNode* middleNode(ListNode* head)  {
+        ListNode* tortoise=head;
+        ListNode* hare=head;
+
+        while(hare!=nullptr && hare->next!=nullptr ){
+            tortoise=tortoise->next;
+            hare=hare->next->next;
+        }
+        return tortoise;
+    }
+};
+TC:O(N)
+SC:O(1)
