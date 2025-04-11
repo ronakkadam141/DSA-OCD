@@ -1,0 +1,71 @@
+q1)
+class Solution {
+public:
+    ListNode* sortList(ListNode* head) {
+        if(head==NULL||head->next==NULL) return head;
+        vector<int>newvec;
+        ListNode*temp=head;
+
+        while(temp){
+            newvec.push_back(temp->val);
+            temp=temp->next;
+        }
+
+        sort(newvec.begin(),newvec.end());
+
+        ListNode* newhead=new ListNode(newvec[0]);
+        ListNode*mover=newhead;
+
+        for(int i=1;i<newvec.size();i++){
+            temp= new ListNode(newvec[i]);
+            mover->next=temp;
+            mover=temp;
+        }
+
+        return newhead;
+    }
+};
+TC:O(NlogN)
+SC:O(N)
+approach: created a vector acc to the given LL, sorted it, and created a new LL acc to sorted vector
+
+q2)
+codeL
+class Solution {
+public:
+    int len(ListNode* head){
+        ListNode*temp=head;
+        int count=0;
+        while(temp){
+            temp=temp->next;
+            count++;
+        }
+        return count;
+    }
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        if(head==NULL ||(head->next==NULL && n==1)) return nullptr;
+        
+        ListNode*hare=head;
+        ListNode*tortoise=head;
+        int count=0;
+
+        while(count!=n){
+            hare=hare->next;
+            count++;
+        }
+
+        if(hare==NULL) return head->next;
+
+        while(hare!=nullptr && hare->next!=nullptr){
+            tortoise=tortoise->next;
+            hare=hare->next;
+        }
+        ListNode* delNode = tortoise->next;
+        tortoise->next = tortoise->next->next;
+        delete delNode;
+        return head;
+
+    }
+};
+TC:O(N)
+SC:O(1)
